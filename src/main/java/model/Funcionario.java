@@ -1,0 +1,40 @@
+package model;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+public class Funcionario {
+	private DadosPessoais dadosPessoais;
+	private LocalDate dataUltimoReajuste;
+
+	public Funcionario(String nome, String cpf, Cargo cargo, BigDecimal salario, LocalDate dataUltimoReajuste) {
+		this.dadosPessoais = new DadosPessoais(nome, cpf, cargo, salario);
+		this.dataUltimoReajuste = dataUltimoReajuste;
+	}
+
+	public void reajustarSalario(BigDecimal novoSalario) {
+		this.dadosPessoais.setSalario(novoSalario);
+		this.dataUltimoReajuste = LocalDate.now();
+	}
+
+	public LocalDate getDataUltimoReajuste() {
+		return dataUltimoReajuste;
+	}
+
+	public void setDataUltimoReajuste(LocalDate dataUltimoReajuste) {
+		this.dataUltimoReajuste = dataUltimoReajuste;
+	}
+
+	public BigDecimal salarioAtual() {
+		return this.dadosPessoais.getSalario();
+	}
+
+	public Cargo cargoAtual() {
+		return this.dadosPessoais.getCargo();
+	}
+
+	public void promover(Cargo novoCargo) {
+		this.dadosPessoais.setCargo(novoCargo);
+		setDataUltimoReajuste(LocalDate.now());
+	}
+}
